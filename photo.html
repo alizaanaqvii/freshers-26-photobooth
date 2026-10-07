@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Freshers '26 | Your Photo</title>
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 25px;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      color: white;
+
+      background:
+
+        radial-gradient(
+          circle at 10% 20%,
+          rgba(124,58,237,0.35),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(236,72,153,0.3),
+          transparent 28%
+        ),
+
+        #090617;
+
+    }
+
+
+    .container {
+
+      width: 100%;
+
+      max-width: 500px;
+
+      text-align: center;
+
+    }
+
+
+    .mini-label {
+
+      font-size: 10px;
+
+      letter-spacing: 3px;
+
+      color: #b9b2c9;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    h1 {
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(38px, 10vw, 60px);
+
+      line-height: 1;
+
+      margin-bottom: 10px;
+
+      background:
+
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #c084fc,
+          #f472b6,
+          #38bdf8
+        );
+
+      -webkit-background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+    }
+
+
+    .subtitle {
+
+      color: #b9b2c9;
+
+      font-size: 14px;
+
+      margin-bottom: 25px;
+
+    }
+
+
+    #photo {
+
+      width: 100%;
+
+      max-width: 400px;
+
+      border-radius: 12px;
+
+      border: 5px solid white;
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.5);
+
+    }
+
+
+    .download {
+
+      display: inline-block;
+
+      margin-top: 25px;
+
+      padding: 14px 28px;
+
+      border-radius: 100px;
+
+      text-decoration: none;
+
+      color: #111;
+
+      background: #bef264;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .footer {
+
+      margin-top: 25px;
+
+      color: #b9b2c9;
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+    }
+
+
+    #loading {
+
+      color: #b9b2c9;
+
+      padding: 40px;
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <main class="container">
+
+
+    <div class="mini-label">
+
+      ✦ HERIOT-WATT UNIVERSITY DUBAI ✦
+
+    </div>
+
+
+    <h1>
+
+      FRESHERS '26
+
+    </h1>
+
+
+    <p class="subtitle">
+
+      YOUR CORE MEMORY IS READY 📸
+
+    </p>
+
+
+    <div id="loading">
+
+      Loading your photo...
+
+    </div>
+
+
+    <img
+      id="photo"
+      style="display:none;"
+      alt="Freshers '26 photo"
+    />
+
+
+    <a
+      id="download"
+      class="download"
+      style="display:none;"
+      download="freshers_26_photo.png"
+    >
+
+      ↓ SAVE PHOTO
+
+    </a>
+
+
+    <div class="footer">
+
+      NEW FRIENDS
+
+      <b>•</b>
+
+      NEW MEMORIES
+
+      <b>•</b>
+
+      NEW ERA
+
+    </div>
+
+
+  </main>
+
+
+  <script>
+
+
+    // ====================================
+    // SUPABASE
+    // ====================================
+
+    const SUPABASE_URL =
+      "PASTE_YOUR_SUPABASE_URL_HERE";
+
+
+    const bucket =
+      "freshers-photos";
+
+
+    // ====================================
+    // GET PHOTO ID
+    // ====================================
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const photoId =
+      params.get("id");
+
+
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+
+    const photo =
+      document.getElementById(
+        "photo"
+      );
+
+
+    const download =
+      document.getElementById(
+        "download"
+      );
+
+
+    // ====================================
+    // LOAD PHOTO
+    // ====================================
+
+    if (!photoId) {
+
+      loading.textContent =
+        "PHOTO NOT FOUND.";
+
+    }
+
+    else {
+
+      const imageUrl =
+
+        `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${photoId}.png`;
+
+
+      photo.onload = () => {
+
+        loading.style.display =
+          "none";
+
+        photo.style.display =
+          "block";
+
+        download.href =
+          imageUrl;
+
+        download.style.display =
+          "inline-block";
+
+      };
+
+
+      photo.onerror = () => {
+
+        loading.textContent =
+          "WE COULDN'T FIND YOUR PHOTO.";
+
+      };
+
+
+      photo.src =
+        imageUrl;
+
+    }
+
+  </script>
+
+
+</body>
+
+</html>

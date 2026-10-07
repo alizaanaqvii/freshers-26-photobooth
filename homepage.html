@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Freshers '26 | Photobooth</title>
+
+  <link rel="stylesheet" href="style_photo.css" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+
+  <!-- Floating decorations -->
+  <div class="decor decor-1">✦</div>
+  <div class="decor decor-2">✧</div>
+  <div class="decor decor-3">★</div>
+  <div class="decor decor-4">✦</div>
+
+  <main class="page">
+
+    <!-- Header -->
+    <header class="hero">
+
+      <div class="mini-label">
+        ✦ HERIOT-WATT UNIVERSITY DUBAI ✦
+      </div>
+
+      <h1>
+        FRESHERS <span>'26</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        MAKE IT A <strong>CORE MEMORY.</strong>
+      </p>
+
+      <p class="hero-description">
+        Grab your friends, strike a pose & make some memories 📸
+      </p>
+
+    </header>
+
+
+    <!-- Photobooth -->
+    <section id="booth">
+
+      <div class="booth-top">
+
+        <div class="booth-label">
+          <span class="live-dot"></span>
+          PHOTOBOOTH LIVE
+        </div>
+
+        <div class="booth-number">
+          FRESHERS 001
+        </div>
+
+      </div>
+
+
+      <div class="booth-flex">
+
+        <!-- Camera -->
+        <div class="camera-section">
+
+          <div class="camera-frame">
+
+            <div class="camera-corner top-left"></div>
+            <div class="camera-corner top-right"></div>
+            <div class="camera-corner bottom-left"></div>
+            <div class="camera-corner bottom-right"></div>
+
+            <video id="webcam" autoplay playsinline></video>
+
+            <div id="countdown"></div>
+
+            <div class="camera-flash"></div>
+
+          </div>
+
+
+          <div class="pose-text">
+            <span>✦</span>
+            GET YOUR POSE READY
+            <span>✦</span>
+          </div>
+
+        </div>
+
+
+        <!-- Film strip -->
+        <div class="preview-section">
+
+          <div class="preview-title">
+            YOUR SHOTS
+          </div>
+
+          <div id="filmStripContainer"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Filters -->
+      <div class="filter-section">
+
+        <p class="filter-heading">
+          CHOOSE YOUR VIBE
+        </p>
+
+        <div id="filterContainer">
+
+          <button
+            class="filter-btn active"
+            data-filter="none"
+          >
+            Original
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="bw"
+          >
+            B&W
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="warm"
+          >
+            Flash
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Controls -->
+      <div class="controls">
+
+  <button id="snapStrip">
+    <span>📸</span>
+    TAKE 4-CUT
+  </button>
+
+  <button id="downloadStrip">
+    ↓ SAVE PHOTO
+  </button>
+
+</div>
+
+
+<!-- QR PHOTO DELIVERY -->
+
+<div id="qrSection">
+
+  <div class="qr-title">
+    YOUR PHOTO IS READY ✦
+  </div>
+
+  <div class="qr-box">
+
+    <div id="qrCanvas"></div>
+
+  </div>
+
+  <p class="qr-instruction">
+    SCAN TO SAVE YOUR PHOTO
+  </p>
+
+  <p id="uploadStatus">
+    Preparing your photo...
+  </p>
+
+</div>
+
+      <canvas id="canvas"></canvas>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+      <span>NEW FRIENDS</span>
+      <b>•</b>
+      <span>NEW MEMORIES</span>
+      <b>•</b>
+      <span>NEW ERA</span>
+
+    </footer>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="script_photo.js"></script>
+
+
+</body>
+</html>
